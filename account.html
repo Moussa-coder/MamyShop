@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - FashionStore</title>
+    <link rel="stylesheet" href="../CSS/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <div class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="about.html">A propos</a></li>
+                <li><a href="chaussures.html">Chaussures</a></li>
+                <li><a href="sacs.html">Sacs</a></li>
+                <li><a href="vetements.html">Vêtements</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </div>
+            <div class="nav-icons">
+                <div class="search-box">
+                    <input type="text" placeholder="Rechercher...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Account Section -->
+    <section class="account-container">
+        <div class="account-header">
+            <h1>Mon Compte</h1>
+            <p>Connectez-vous ou créez un compte pour accéder à votre espace personnel.</p>
+        </div>
+
+        <div class="account-tabs">
+            <button class="tab-button active" onclick="showForm('login')">Connexion</button>
+            <button class="tab-button" onclick="showForm('register')">Inscription</button>
+        </div>
+
+        <div class="account-forms">
+            <!-- Login Form -->
+            <form id="login-form" class="form-container" novalidate>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                    <div class="error-message">Veuillez entrer une adresse email valide</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required>
+                    <div class="error-message">Le mot de passe est requis</div>
+                </div>
+
+                <button type="submit" class="form-button">Se connecter</button>
+
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPassword()">Mot de passe oublié ?</a>
+                </div>
+
+                <div class="social-login">
+                    <p>Ou connectez-vous avec</p>
+                    <div class="social-buttons">
+                        <button type="button" class="social-button facebook-btn">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                        <button type="button" class="social-button google-btn">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="form-container" novalidate>
+                <div class="form-group">
+                    <label for="register-name">Nom complet</label>
+                    <input type="text" id="register-name" required>
+                    <div class="error-message">Le nom est requis</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                    <div class="error-message">Veuillez entrer une adresse email valide</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" id="register-password" required>
+                    <div class="error-message">Le mot de passe doit contenir au moins 8 caractères</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" id="register-confirm-password" required>
+                    <div class="error-message">Les mots de passe ne correspondent pas</div>
+                </div>
+
+                <button type="submit" class="form-button">S'inscrire</button>
+
+                <div class="social-login">
+                    <p>Ou inscrivez-vous avec</p>
+                    <div class="social-buttons">
+                        <button type="button" class="social-button facebook-btn">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                        <button type="button" class="social-button google-btn">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos de MamyShop</h3>
+                    <p>Votre destination mode en ligne pour des vêtements, chaussures et accessoires tendance.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="shop.html">Boutique</a></li>
+                        <li><a href="categories.html">Catégories</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: contact@mamyshop.com</p>
+                    <p>Téléphone: +33 1 23 45 67 89</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MamyShop. Tous droits réservés.</p>
+            </div>
+        </footer>
+</body>
+</html> 

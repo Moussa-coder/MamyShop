@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique en ligne - Accueil</title>
+    <link rel="stylesheet" href="CSS/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a class="logo">Boutique</a>
+            <button class="menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="about.html">A propos</a></li>
+                <li><a href="chaussures.html">Chaussures</a></li>
+                <li><a href="sacs.html">Sacs</a></li>
+                <li><a href="vetements.html">Vêtements</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenue sur notre boutique</h1>
+            <p>Découvrez notre collection exclusive de mode</p>
+            <a href="#featured-products" class="cta-button">Voir nos produits</a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <h2>Nos Catégories</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="images/chaussures.jpg" alt="Chaussures">
+                <h3>Chaussures</h3>
+                <a href="chaussures.html" class="category-link">Découvrir</a>
+            </div>
+            <div class="category-card">
+                <img src="images/sacs.jpg" alt="Sacs">
+                <h3>Sacs</h3>
+                <a href="sacs.html" class="category-link">Découvrir</a>
+            </div>
+            <div class="category-card">
+                <img src="images/vetements.jpg" alt="Vêtements">
+                <h3>Vêtements</h3>
+                <a href="vetements.html" class="category-link">Découvrir</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured-products" class="featured-products">
+        <h2>Produits en Vedette</h2>
+        <div class="products-grid">
+            <!-- Les produits seront ajoutés dynamiquement ici -->
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Restez informé</h2>
+            <p>Inscrivez-vous à notre newsletter pour recevoir nos dernières offres</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Votre adresse email" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Panier flottant -->
+    <div class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <ul>
+                    <li><a href="about.html">Notre histoire</a></li>
+                    <li><a href="#">Nos valeurs</a></li>
+                    <li><a href="#">Carrières</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Service client</h3>
+                <ul>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations légales</h3>
+                <ul>
+                    <li><a href="#">Conditions générales</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/main.js"></script>
+</body>
+</html> 

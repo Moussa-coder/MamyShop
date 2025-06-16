@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacs - Boutique en ligne</title>
+    <link rel="stylesheet" href="CSS/sacs.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Boutique</a>
+            <button class="menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="about.html">A propos</a></li>
+                <li><a href="chaussures.html">Chaussures</a></li>
+                <li><a href="sacs.html">Sacs</a></li>
+                <li><a href="vetements.html">Vêtements</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('images/sacs-hero.jpg');">
+        <div class="hero-content">
+            <h1>Collection Sacs</h1>
+            <p>Découvrez notre sélection de sacs élégants</p>
+        </div>
+    </section>
+
+    <!-- Filtres -->
+    <section class="filters">
+        <div class="filter-group">
+            <label for="category-filter">Type:</label>
+            <select id="category-filter">
+                <option value="all">Tous les types</option>
+                <option value="sacs-a-main">Sacs à main</option>
+                <option value="sacs-a-dos">Sacs à dos</option>
+                <option value="pochettes">Pochettes</option>
+                <option value="sacs-de-voyage">Sacs de voyage</option>
+            </select>
+
+            <label for="price-filter">Prix:</label>
+            <select id="price-filter">
+                <option value="all">Tous les prix</option>
+                <option value="0-50">0€ - 50€</option>
+                <option value="50-100">50€ - 100€</option>
+                <option value="100-200">100€ - 200€</option>
+                <option value="200-1000">200€ et plus</option>
+            </select>
+
+            <label for="sort-filter">Trier par:</label>
+            <select id="sort-filter">
+                <option value="default">Par défaut</option>
+                <option value="price-asc">Prix croissant</option>
+                <option value="price-desc">Prix décroissant</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Grille de produits -->
+    <section class="products-grid">
+        <!-- Sac à main -->
+        <div class="product-card" data-category="sacs-a-main" data-price="149.99">
+            <img src="images/sac-main1.jpg" alt="Sac à main" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Sac à main Cuir</h3>
+                <p class="product-price">149.99 €</p>
+                <button class="add-to-cart">Ajouter au panier</button>
+            </div>
+        </div>
+
+        <!-- Sac à dos -->
+        <div class="product-card" data-category="sacs-a-dos" data-price="79.99">
+            <img src="images/sac-dos1.jpg" alt="Sac à dos" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Sac à dos Urbain</h3>
+                <p class="product-price">79.99 €</p>
+                <button class="add-to-cart">Ajouter au panier</button>
+            </div>
+        </div>
+
+        <!-- Pochette -->
+        <div class="product-card" data-category="pochettes" data-price="89.99">
+            <img src="images/pochette1.jpg" alt="Pochette" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Pochette Soirée</h3>
+                <p class="product-price">89.99 €</p>
+                <button class="add-to-cart">Ajouter au panier</button>
+            </div>
+        </div>
+
+        <!-- Sac de voyage -->
+        <div class="product-card" data-category="sacs-de-voyage" data-price="199.99">
+            <img src="images/sac-voyage1.jpg" alt="Sac de voyage" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Sac de Voyage Premium</h3>
+                <p class="product-price">199.99 €</p>
+                <button class="add-to-cart">Ajouter au panier</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panier flottant -->
+    <div class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <ul>
+                    <li><a href="#">Notre histoire</a></li>
+                    <li><a href="#">Nos valeurs</a></li>
+                    <li><a href="#">Carrières</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Service client</h3>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations légales</h3>
+                <ul>
+                    <li><a href="#">Conditions générales</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/main.js"></script>
+</body>
+</html> 
