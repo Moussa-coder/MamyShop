@@ -13,18 +13,24 @@
     <!-- Header -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">Boutique</a>
-            <button class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <div class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="about.html">A propos</a></li>
                 <li><a href="chaussures.html">Chaussures</a></li>
                 <li><a href="sacs.html">Sacs</a></li>
                 <li><a href="vetements.html">Vêtements</a></li>
                 <li><a href="contact.html">Contact</a></li>
-            </ul>
+            </div>
+            <div class="nav-icons">
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -69,7 +75,7 @@
     <!-- Grille de produits -->
     <section class="products-grid">
         <!-- Sac à main -->
-        <div class="product-card" data-category="sacs-a-main" data-price="149.99">
+        <div class="product-card" data-category="sacs-a-main" data-price="149.99" data-id="sac-01">
             <img src="images/sac-main1.jpg" alt="Sac à main" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Sac à main Cuir</h3>
@@ -79,7 +85,7 @@
         </div>
 
         <!-- Sac à dos -->
-        <div class="product-card" data-category="sacs-a-dos" data-price="79.99">
+        <div class="product-card" data-category="sacs-a-dos" data-price="79.99" data-id="sac-02">
             <img src="images/sac-dos1.jpg" alt="Sac à dos" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Sac à dos Urbain</h3>
@@ -89,7 +95,7 @@
         </div>
 
         <!-- Pochette -->
-        <div class="product-card" data-category="pochettes" data-price="89.99">
+        <div class="product-card" data-category="pochettes" data-price="89.99" data-id="sac-03">
             <img src="images/pochette1.jpg" alt="Pochette" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Pochette Soirée</h3>
@@ -99,7 +105,7 @@
         </div>
 
         <!-- Sac de voyage -->
-        <div class="product-card" data-category="sacs-de-voyage" data-price="199.99">
+        <div class="product-card" data-category="sacs-de-voyage" data-price="199.99" data-id="sac-04">
             <img src="images/sac-voyage1.jpg" alt="Sac de voyage" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Sac de Voyage Premium</h3>
@@ -108,12 +114,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Panier flottant -->
-    <div class="floating-cart">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
 
     <!-- Footer -->
     <footer>

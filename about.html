@@ -16,11 +16,18 @@
         </div>
         <div class="nav-links">
             <li><a href="index.html">Accueil</a></li>
-                <li><a href="about.html">A propos</a></li>
-                <li><a href="chaussures.html">Chaussures</a></li>
-                <li><a href="sacs.html">Sacs</a></li>
-                <li><a href="vetements.html">Vêtements</a></li>
-                <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">A propos</a></li>
+            <li><a href="chaussures.html">Chaussures</a></li>
+            <li><a href="sacs.html">Sacs</a></li>
+            <li><a href="vetements.html">Vêtements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </div>
+        <div class="nav-icons">
+            <a href="account.html"><i class="fas fa-user"></i></a>
+            <a href="cart.html" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </a>
         </div>
     </nav>
 </header>
@@ -188,5 +195,12 @@
             </div>
         </div>
     </footer>
+    <script src="JS/main.js"></script>
+    <script>
+        // Mettre à jour le compteur du panier au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
 </body>
 </html> 

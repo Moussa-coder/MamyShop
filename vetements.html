@@ -12,18 +12,24 @@
     <!-- Header -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">Boutique</a>
-            <button class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <div class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="about.html">A propos</a></li>
                 <li><a href="chaussures.html">Chaussures</a></li>
                 <li><a href="sacs.html">Sacs</a></li>
                 <li><a href="vetements.html">Vêtements</a></li>
                 <li><a href="contact.html">Contact</a></li>
-            </ul>
+            </div>
+            <div class="nav-icons">
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -68,7 +74,7 @@
     <!-- Grille de produits -->
     <section class="products-grid">
         <!-- Haut -->
-        <div class="product-card" data-category="hauts" data-price="49.99">
+        <div class="product-card" data-category="hauts" data-price="49.99" data-id="vetement-01">
             <img src="images/haut1.jpg" alt="Haut" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">T-shirt Premium</h3>
@@ -78,7 +84,7 @@
         </div>
 
         <!-- Pantalon -->
-        <div class="product-card" data-category="pantalons" data-price="79.99">
+        <div class="product-card" data-category="pantalons" data-price="79.99" data-id="vetement-02">
             <img src="images/pantalon1.jpg" alt="Pantalon" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Jean Slim</h3>
@@ -88,7 +94,7 @@
         </div>
 
         <!-- Robe -->
-        <div class="product-card" data-category="robes" data-price="89.99">
+        <div class="product-card" data-category="robes" data-price="89.99" data-id="vetement-03">
             <img src="images/robe1.jpg" alt="Robe" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Robe d'Été</h3>
@@ -98,7 +104,7 @@
         </div>
 
         <!-- Veste -->
-        <div class="product-card" data-category="vestes" data-price="129.99">
+        <div class="product-card" data-category="vestes" data-price="129.99" data-id="vetement-04">
             <img src="images/veste1.jpg" alt="Veste" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Veste en Cuir</h3>
@@ -107,12 +113,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Panier flottant -->
-    <div class="floating-cart">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
 
     <!-- Footer -->
     <footer>

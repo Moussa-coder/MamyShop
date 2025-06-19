@@ -12,18 +12,24 @@
     <!-- Header -->
     <header>
         <nav class="navbar">
-            <a class="logo">Boutique</a>
-            <button class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <div class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="about.html">A propos</a></li>
                 <li><a href="chaussures.html">Chaussures</a></li>
                 <li><a href="sacs.html">Sacs</a></li>
                 <li><a href="vetements.html">Vêtements</a></li>
                 <li><a href="contact.html">Contact</a></li>
-            </ul>
+            </div>
+            <div class="nav-icons">
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -78,12 +84,6 @@
         </div>
     </section>
 
-    <!-- Panier flottant -->
-    <div class="floating-cart">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -123,5 +123,31 @@
     </footer>
 
     <script src="JS/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const featuredProducts = [
+                { id: 'feat-01', name: 'Robe d\'Été Élégante', price: '89.99', image: 'images/robe1.jpg', category: 'robes' },
+                { id: 'feat-02', name: 'Bottes en Cuir', price: '159.99', image: 'images/bottes1.jpg', category: 'bottes' },
+                { id: 'feat-03', name: 'Sac à main Tendance', price: '149.99', image: 'images/sac-main1.jpg', category: 'sacs-a-main' },
+                { id: 'feat-04', name: 'Sneakers Urban Style', price: '89.99', image: 'images/sneakers1.jpg', category: 'sneakers' }
+            ];
+
+            const productsGrid = document.querySelector('#featured-products .products-grid');
+            
+            featuredProducts.forEach(product => {
+                const productCard = `
+                    <div class="product-card" data-id="${product.id}" data-price="${product.price}" data-category="${product.category}">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-price">${product.price} €</p>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                `;
+                productsGrid.innerHTML += productCard;
+            });
+        });
+    </script>
 </body>
 </html> 

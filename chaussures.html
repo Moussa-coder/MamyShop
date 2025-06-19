@@ -13,18 +13,24 @@
     <!-- Header -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">Boutique</a>
-            <button class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <div class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="about.html">A propos</a></li>
                 <li><a href="chaussures.html">Chaussures</a></li>
                 <li><a href="sacs.html">Sacs</a></li>
                 <li><a href="vetements.html">Vêtements</a></li>
                 <li><a href="contact.html">Contact</a></li>
-            </ul>
+            </div>
+            <div class="nav-icons">
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -69,7 +75,7 @@
     <!-- Grille de produits -->
     <section class="products-grid">
         <!-- Sneakers -->
-        <div class="product-card" data-category="sneakers" data-price="89.99">
+        <div class="product-card" data-category="sneakers" data-price="89.99" data-id="chaussure-01">
             <img src="images/sneakers1.jpg" alt="Sneakers" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Sneakers Urban</h3>
@@ -79,7 +85,7 @@
         </div>
 
         <!-- Baskets -->
-        <div class="product-card" data-category="baskets" data-price="129.99">
+        <div class="product-card" data-category="baskets" data-price="129.99" data-id="chaussure-02">
             <img src="images/baskets1.jpg" alt="Baskets" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Baskets Sport</h3>
@@ -89,7 +95,7 @@
         </div>
 
         <!-- Sandales -->
-        <div class="product-card" data-category="sandales" data-price="59.99">
+        <div class="product-card" data-category="sandales" data-price="59.99" data-id="chaussure-03">
             <img src="images/sandales1.jpg" alt="Sandales" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Sandales Été</h3>
@@ -99,7 +105,7 @@
         </div>
 
         <!-- Bottes -->
-        <div class="product-card" data-category="bottes" data-price="159.99">
+        <div class="product-card" data-category="bottes" data-price="159.99" data-id="chaussure-04">
             <img src="images/bottes1.jpg" alt="Bottes" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Bottes Cuir</h3>
@@ -108,12 +114,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Panier flottant -->
-    <div class="floating-cart">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
 
     <!-- Footer -->
     <footer>
