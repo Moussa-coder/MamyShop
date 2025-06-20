@@ -293,6 +293,13 @@ footer {
     font-size: 1.5rem;
 }
 
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--text-light);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .menu-button {
@@ -355,6 +362,32 @@ footer {
 .nav-icons a:hover {
     color: var(--primary-blue);
     transform: translateY(-2px);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--gray);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    margin-right: 1rem;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0.4rem 0.5rem;
+    font-size: 1rem;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 0.3rem;
 }
 
 .cart-icon {
