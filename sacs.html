@@ -3,11 +3,745 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacs - Boutique en ligne</title>
-    <link rel="stylesheet" href="CSS/sacs.css">
-    <link rel="stylesheet" href="/CSS/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Sacs - MamyShop</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #2c3e50;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #777;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button, .button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-color);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 150px;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            width: 200px;
+        }
+
+        .search-box button {
+            background: transparent;
+            color: var(--dark-color);
+        }
+
+        .nav-icons a {
+            font-size: 1.2rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 40vh;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: #f5f5f5;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-content a {
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .breadcrumb-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-content span {
+            color: var(--text-light);
+        }
+
+        /* Filters Section */
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-group select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+        }
+
+        .search-filter {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .search-filter input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            width: 200px;
+        }
+
+        .search-filter button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 0 5px 5px 0;
+            transition: var(--transition);
+        }
+
+        .search-filter button:hover {
+            background: var(--accent-color);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .product-category {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--dark-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .sale-badge {
+            background: var(--error-color);
+        }
+
+        .new-badge {
+            background: var(--success-color);
+        }
+
+        /* Color Selector */
+        .color-selector {
+            display: none;
+            margin-bottom: 1rem;
+        }
+
+        .product-card:hover .color-selector {
+            display: block;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .color-option:hover, .color-option.selected {
+            border: 2px solid var(--dark-color);
+            transform: scale(1.2);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .pagination-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            background: white;
+            color: var(--dark-color);
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .pagination-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .pagination-button:hover:not(.active) {
+            background: var(--light-color);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            z-index: 1002;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Quick View Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            width: 90%;
+            position: relative;
+            transform: translateY(-50px);
+            transition: var(--transition);
+            display: flex;
+            gap: 2rem;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .modal-image {
+            flex: 1;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .modal-details {
+            flex: 1;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-filter {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .search-filter input {
+                width: 100%;
+            }
+            
+            .modal-content {
+                flex-direction: column;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .modal-image img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background-color: white;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .nav-links li {
+                padding: 0.8rem 2rem;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .hero {
+                height: 30vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .color-selector {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -16,150 +750,502 @@
             <div class="logo">
                 <h1>MamyShop</h1>
             </div>
-            <div class="nav-links">
+            <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="about.html">A propos</a></li>
+                <li><a href="about.html">À propos</a></li>
                 <li><a href="chaussures.html">Chaussures</a></li>
-                <li><a href="sacs.html">Sacs</a></li>
+                <li><a href="sacs.html" class="active">Sacs</a></li>
                 <li><a href="vetements.html">Vêtements</a></li>
                 <li><a href="contact.html">Contact</a></li>
-            </div>
+            </ul>
             <div class="nav-icons">
                 <div class="search-box">
-                    <input type="text" placeholder="Rechercher...">
-                    <button><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Rechercher..." aria-label="Rechercher">
+                    <button title="Rechercher"><i class="fas fa-search"></i></button>
                 </div>
-                <a href="account.html"><i class="fas fa-user"></i></a>
-                <a href="cart.html" class="cart-icon">
+                <a href="account.html" title="Mon compte"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon" title="Panier">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </a>
             </div>
         </nav>
     </header>
-
+    
     <!-- Hero Section -->
-    <section class="hero" style="background-image: url('images/sacs-hero.jpg');">
-        <div class="hero-content">
-            <h1>Collection Sacs</h1>
-            <p>Découvrez notre sélection de sacs élégants</p>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Collection Sacs</h1>
+                <p>Découvrez notre sélection de sacs élégants pour toutes les occasions</p>
+            </div>
         </div>
     </section>
 
     <!-- Filtres -->
     <section class="filters">
-        <div class="filter-group">
-            <label for="category-filter">Type:</label>
-            <select id="category-filter">
-                <option value="all">Tous les types</option>
-                <option value="sacs-a-main">Sacs à main</option>
-                <option value="sacs-a-dos">Sacs à dos</option>
-                <option value="pochettes">Pochettes</option>
-                <option value="sacs-de-voyage">Sacs de voyage</option>
-            </select>
+        <div class="container">
+            <div class="filter-group">
+                <label for="category-filter">Type:</label>
+                <select id="category-filter">
+                    <option value="all">Tous les types</option>
+                    <option value="sacs-a-main">Sacs à main</option>
+                    <option value="sacs-a-dos">Sacs à dos</option>
+                    <option value="pochettes">Pochettes</option>
+                    <option value="sacs-de-voyage">Sacs de voyage</option>
+                    <option value="sacs-bandouliere">Sacs bandoulière</option>
+                    <option value="sacs-paniers">Sacs paniers</option>
+                </select>
 
-            <label for="price-filter">Prix:</label>
-            <select id="price-filter">
-                <option value="all">Tous les prix</option>
-                <option value="0-50">0€ - 50€</option>
-                <option value="50-100">50€ - 100€</option>
-                <option value="100-200">100€ - 200€</option>
-                <option value="200-1000">200€ et plus</option>
-            </select>
+                <label for="price-filter">Prix:</label>
+                <select id="price-filter">
+                    <option value="all">Tous les prix</option>
+                    <option value="0-50">0€ - 50€</option>
+                    <option value="50-100">50€ - 100€</option>
+                    <option value="100-200">100€ - 200€</option>
+                    <option value="200-1000">200€ et plus</option>
+                </select>
 
-            <label for="sort-filter">Trier par:</label>
-            <select id="sort-filter">
-                <option value="default">Par défaut</option>
-                <option value="price-asc">Prix croissant</option>
-                <option value="price-desc">Prix décroissant</option>
-            </select>
+                <label for="sort-filter">Trier par:</label>
+                <select id="sort-filter">
+                    <option value="default">Par défaut</option>
+                    <option value="price-asc">Prix croissant</option>
+                    <option value="price-desc">Prix décroissant</option>
+                    <option value="name-asc">Nom A-Z</option>
+                    <option value="name-desc">Nom Z-A</option>
+                </select>
+                
+                <div class="search-filter">
+                    <input type="text" id="search-filter" placeholder="Rechercher...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Grille de produits -->
-    <section class="products-grid">
-        <!-- Sac à main -->
-        <div class="product-card" data-category="sacs-a-main" data-price="149.99" data-id="sac-01">
-            <img src="images/sac-main1.jpg" alt="Sac à main" class="product-image">
-            <div class="product-info">
-                <h3 class="product-title">Sac à main Cuir</h3>
-                <p class="product-price">149.99 €</p>
-                <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <!-- Sac à dos -->
-        <div class="product-card" data-category="sacs-a-dos" data-price="79.99" data-id="sac-02">
-            <img src="images/sac-dos1.jpg" alt="Sac à dos" class="product-image">
-            <div class="product-info">
-                <h3 class="product-title">Sac à dos Urbain</h3>
-                <p class="product-price">79.99 €</p>
-                <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <!-- Pochette -->
-        <div class="product-card" data-category="pochettes" data-price="89.99" data-id="sac-03">
-            <img src="images/pochette1.jpg" alt="Pochette" class="product-image">
-            <div class="product-info">
-                <h3 class="product-title">Pochette Soirée</h3>
-                <p class="product-price">89.99 €</p>
-                <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <!-- Sac de voyage -->
-        <div class="product-card" data-category="sacs-de-voyage" data-price="199.99" data-id="sac-04">
-            <img src="images/sac-voyage1.jpg" alt="Sac de voyage" class="product-image">
-            <div class="product-info">
-                <h3 class="product-title">Sac de Voyage Premium</h3>
-                <p class="product-price">199.99 €</p>
-                <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-        </div>
+    <section class="products-grid container" id="products-grid">
+        <!-- Les produits seront ajoutés dynamiquement ici -->
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>À propos</h3>
-                <ul>
-                    <li><a href="#">Notre histoire</a></li>
-                    <li><a href="#">Nos valeurs</a></li>
-                    <li><a href="#">Carrières</a></li>
-                </ul>
+    <!-- Pagination -->
+    <div class="container">
+        <div class="pagination" id="pagination">
+            <!-- La pagination sera ajoutée dynamiquement ici -->
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <div class="modal-image">
+                <img id="modal-img" src="" alt="">
             </div>
-            <div class="footer-section">
-                <h3>Service client</h3>
-                <ul>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Livraison</a></li>
-                    <li><a href="#">Retours</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Informations légales</h3>
-                <ul>
-                    <li><a href="#">Conditions générales</a></li>
-                    <li><a href="#">Politique de confidentialité</a></li>
-                    <li><a href="#">Mentions légales</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+            <div class="modal-details">
+                <h2 id="modal-title"></h2>
+                <p class="modal-price" id="modal-price"></p>
+                <p class="modal-description" id="modal-description"></p>
+                <div class="color-selector">
+                    <p>Couleur:</p>
+                    <div class="color-options">
+                        <span class="color-option selected" style="background-color: #000;"></span>
+                        <span class="color-option" style="background-color: #964B00;"></span>
+                        <span class="color-option" style="background-color: #fff; border: 1px solid #ddd;"></span>
+                        <span class="color-option" style="background-color: #e67e22;"></span>
+                        <span class="color-option" style="background-color: #2c3e50;"></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="add-to-cart" id="modal-add-to-cart">Ajouter au panier</button>
+                    <button class="add-to-cart" style="background-color: var(--secondary-color);">Voir les détails</button>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 MamyShop. Tous droits réservés.</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos</h3>
+                    <ul>
+                        <li><a href="#">Notre histoire</a></li>
+                        <li><a href="#">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Service client</h3>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Informations légales</h3>
+                    <ul>
+                        <li><a href="#">Conditions générales</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MamyShop. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="JS/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuButton = document.getElementById('menu-button');
+            const navLinks = document.getElementById('nav-links');
+            const productsGrid = document.getElementById('products-grid');
+            const pagination = document.getElementById('pagination');
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const sortFilter = document.getElementById('sort-filter');
+            const searchFilter = document.getElementById('search-filter');
+            const searchButton = document.getElementById('search-button');
+            const cartCount = document.querySelector('.cart-count');
+            const toast = document.getElementById('toast');
+            const productModal = document.getElementById('product-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalPrice = document.getElementById('modal-price');
+            const modalDescription = document.getElementById('modal-description');
+            const modalAddToCart = document.getElementById('modal-add-to-cart');
+            
+            // Sample products data (30 products)
+            const products = [
+                { id: 'sac-001', name: 'Sac à Main en Cuir Classique', price: 149.99, category: 'sacs-a-main', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Sac à main en cuir véritable, élégant et intemporel. Parfait pour compléter toutes vos tenues.' },
+                { id: 'sac-002', name: 'Sac à Dos Urbain', price: 79.99, category: 'sacs-a-dos', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac à dos fonctionnel et stylé, idéal pour la ville ou le campus.' },
+                { id: 'sac-003', name: 'Pochette de Soirée Strass', price: 89.99, category: 'pochettes', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Pochette élégante avec détails strass, parfaite pour vos soirées.' },
+                { id: 'sac-004', name: 'Sac de Voyage Premium', price: 199.99, category: 'sacs-de-voyage', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Grand sac de voyage spacieux et résistant, idéal pour les longs voyages.' },
+                { id: 'sac-005', name: 'Sac Bandoulière Cuir', price: 129.99, category: 'sacs-bandouliere', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Sac bandoulière en cuir, pratique et stylé pour un usage quotidien.' },
+                { id: 'sac-006', name: 'Sac Panier Éthnique', price: 69.99, category: 'sacs-paniers', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac panier tendance, parfait pour l\'été et les looks bohèmes.' },
+                { id: 'sac-007', name: 'Sac à Main Tote', price: 119.99, category: 'sacs-a-main', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Grand sac tote spacieux, idéal pour le travail ou les courses.' },
+                { id: 'sac-008', name: 'Sac à Dos Randonnée', price: 139.99, category: 'sacs-a-dos', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Sac à dos technique pour la randonnée, avec de multiples compartiments.' },
+                { id: 'sac-009', name: 'Pochette Clutch Velours', price: 59.99, category: 'pochettes', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Pochette clutch en velours, élégante et raffinée pour les occasions spéciales.' },
+                { id: 'sac-010', name: 'Valise Cabine', price: 229.99, category: 'sacs-de-voyage', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Valise cabine pratique et légère, aux normes des compagnies aériennes.' },
+                { id: 'sac-011', name: 'Sac Bandoulière Croco', price: 179.99, category: 'sacs-bandouliere', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac bandoulière en cuir croco, luxueux et sophistiqué.' },
+                { id: 'sac-012', name: 'Sac Panier avec Poignées', price: 79.99, category: 'sacs-paniers', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac panier avec poignées solides, parfait pour le marché ou la plage.' },
+                { id: 'sac-013', name: 'Sac à Main Mini', price: 89.99, category: 'sacs-a-main', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Petit sac à main mignon et pratique pour l\'essentiel.' },
+                { id: 'sac-014', name: 'Sac à Dos Ordinateur', price: 99.99, category: 'sacs-a-dos', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac à dos avec compartiment ordinateur, idéal pour les professionnels.' },
+                { id: 'sac-015', name: 'Pochette Métallique', price: 109.99, category: 'pochettes', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Pochette au fini métallique, qui attire tous les regards.' },
+                { id: 'sac-016', name: 'Sac de Voyage Rigide', price: 279.99, category: 'sacs-de-voyage', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac de voyage rigide et élégant, pour protéger vos affaires.' },
+                { id: 'sac-017', name: 'Sac Bandoulière Saddle', price: 159.99, category: 'sacs-bandouliere', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac bandoulière style saddle, tendance et confortable à porter.' },
+                { id: 'sac-018', name: 'Grand Sac Panier', price: 89.99, category: 'sacs-paniers', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Grand sac panier, spacieux et parfait pour l\'été.' },
+                { id: 'sac-019', name: 'Sac à Main Satchel', price: 169.99, category: 'sacs-a-main', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac satchel en cuir, classique et intemporel.' },
+                { id: 'sac-020', name: 'Sac à Dos Mini', price: 59.99, category: 'sacs-a-dos', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Petit sac à dos mignon, parfait pour les sorties légères.' },
+                { id: 'sac-021', name: 'Pochette Perlé', price: 129.99, category: 'pochettes', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Pochette décorée de perles, élégante et raffinée.' },
+                { id: 'sac-022', name: 'Sac de Week-end', price: 149.99, category: 'sacs-de-voyage', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac de week-end spacieux, pour vos escapades.' },
+                { id: 'sac-023', name: 'Sac Bandoulière Canvas', price: 69.99, category: 'sacs-bandouliere', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Sac bandoulière en canvas, décontracté et résistant.' },
+                { id: 'sac-024', name: 'Sac Panier avec Fermeture', price: 79.99, category: 'sacs-paniers', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac panier pratique avec fermeture, pour plus de sécurité.' },
+                { id: 'sac-025', name: 'Sac à Main Structuré', price: 189.99, category: 'sacs-a-main', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Sac à main structuré qui garde sa forme, élégant et pratique.' },
+                { id: 'sac-026', name: 'Sac à Dos Anti-vol', price: 119.99, category: 'sacs-a-dos', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac à dos avec fonctionnalités anti-vol, pour voyager en sécurité.' },
+                { id: 'sac-027', name: 'Pochette Brodée', price: 99.99, category: 'pochettes', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Pochette avec broderies artisanales, unique et élégante.' },
+                { id: 'sac-028', name: 'Sac de Voyage Expandable', price: 199.99, category: 'sacs-de-voyage', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'sale', description: 'Sac de voyage extensible, pour s\'adapter à tous vos besoins.' },
+                { id: 'sac-029', name: 'Sac Bandoulière Nappa', price: 149.99, category: 'sacs-bandouliere', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: '', description: 'Sac bandoulière en cuir nappa, doux et luxueux.' },
+                { id: 'sac-030', name: 'Sac Panier Pliable', price: 49.99, category: 'sacs-paniers', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', badge: 'new', description: 'Sac panier pliable, pratique à transporter et à ranger.' }
+            ];
+            
+            // Pagination variables
+            let currentPage = 1;
+            const productsPerPage = 9;
+            let filteredProducts = [...products];
+            let currentProduct = null;
+            
+            // Menu mobile
+            menuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                menuButton.setAttribute('aria-expanded', 
+                    navLinks.classList.contains('active') ? 'true' : 'false');
+            });
+            
+            // Update cart count
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('mamyshop_cart')) || [];
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+            
+            // Display products
+            function displayProducts() {
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                const productsToShow = filteredProducts.slice(startIndex, endIndex);
+                
+                productsGrid.innerHTML = '';
+                
+                if (productsToShow.length === 0) {
+                    productsGrid.innerHTML = '<p class="no-products">Aucun produit ne correspond à vos critères.</p>';
+                    pagination.innerHTML = '';
+                    return;
+                }
+                
+                productsToShow.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    productCard.dataset.id = product.id;
+                    productCard.dataset.category = product.category;
+                    productCard.dataset.price = product.price;
+                    
+                    let badgeHTML = '';
+                    if (product.badge === 'new') {
+                        badgeHTML = '<span class="product-badge new-badge">Nouveau</span>';
+                    } else if (product.badge === 'sale') {
+                        badgeHTML = '<span class="product-badge sale-badge">Promo</span>';
+                    }
+                    
+                    productCard.innerHTML = `
+                        ${badgeHTML}
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-category">${product.category}</p>
+                            <p class="product-price">${product.price.toFixed(2)} €</p>
+                            <div class="color-selector">
+                                <div class="color-options">
+                                    <span class="color-option selected" style="background-color: #000;"></span>
+                                    <span class="color-option" style="background-color: #964B00;"></span>
+                                    <span class="color-option" style="background-color: #fff; border: 1px solid #ddd;"></span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    `;
+                    
+                    productsGrid.appendChild(productCard);
+                    
+                    // Add event listeners
+                    const productImage = productCard.querySelector('.product-image');
+                    const addToCartButton = productCard.querySelector('.add-to-cart');
+                    const colorOptions = productCard.querySelectorAll('.color-option');
+                    
+                    productImage.addEventListener('click', () => openProductModal(product));
+                    addToCartButton.addEventListener('click', () => addToCart(product));
+                    
+                    colorOptions.forEach(option => {
+                        option.addEventListener('click', function() {
+                            colorOptions.forEach(opt => opt.classList.remove('selected'));
+                            this.classList.add('selected');
+                        });
+                    });
+                });
+                
+                // Update pagination
+                updatePagination();
+            }
+            
+            // Update pagination
+            function updatePagination() {
+                const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+                
+                pagination.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+                
+                // Previous button
+                if (currentPage > 1) {
+                    const prevButton = document.createElement('button');
+                    prevButton.classList.add('pagination-button');
+                    prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    prevButton.addEventListener('click', () => {
+                        currentPage--;
+                        displayProducts();
+                        window.scrollTo({ top: productsGrid.offsetTop - 100, behavior: 'smooth' });
+                    });
+                    pagination.appendChild(prevButton);
+                }
+                
+                // Page buttons
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageButton = document.createElement('button');
+                    pageButton.classList.add('pagination-button');
+                    if (i === currentPage) {
+                        pageButton.classList.add('active');
+                    }
+                    pageButton.textContent = i;
+                    pageButton.addEventListener('click', () => {
+                        currentPage = i;
+                        displayProducts();
+                        window.scrollTo({ top: productsGrid.offsetTop - 100, behavior: 'smooth' });
+                    });
+                    pagination.appendChild(pageButton);
+                }
+                
+                // Next button
+                if (currentPage < totalPages) {
+                    const nextButton = document.createElement('button');
+                    nextButton.classList.add('pagination-button');
+                    nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    nextButton.addEventListener('click', () => {
+                        currentPage++;
+                        displayProducts();
+                        window.scrollTo({ top: productsGrid.offsetTop - 100, behavior: 'smooth' });
+                    });
+                    pagination.appendChild(nextButton);
+                }
+            }
+            
+            // Add to cart
+            function addToCart(product) {
+                let cart = JSON.parse(localStorage.getItem('mamyshop_cart')) || [];
+                
+                // Check if product already in cart
+                const existingProduct = cart.find(item => item.id === product.id);
+                
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                
+                localStorage.setItem('mamyshop_cart', JSON.stringify(cart));
+                updateCartCount();
+                showToast(`${product.name} ajouté au panier!`);
+            }
+            
+            // Open product modal
+            function openProductModal(product) {
+                currentProduct = product;
+                modalImg.src = product.image;
+                modalImg.alt = product.name;
+                modalTitle.textContent = product.name;
+                modalPrice.textContent = `${product.price.toFixed(2)} €`;
+                modalDescription.textContent = product.description;
+                productModal.classList.add('active');
+            }
+            
+            // Close product modal
+            closeModal.addEventListener('click', () => {
+                productModal.classList.remove('active');
+            });
+            
+            // Add to cart from modal
+            modalAddToCart.addEventListener('click', () => {
+                if (currentProduct) {
+                    addToCart(currentProduct);
+                    productModal.classList.remove('active');
+                }
+            });
+            
+            // Filter products
+            function filterProducts() {
+                const categoryValue = categoryFilter.value;
+                const priceValue = priceFilter.value;
+                const sortValue = sortFilter.value;
+                const searchValue = searchFilter.value.toLowerCase();
+                
+                filteredProducts = products.filter(product => {
+                    // Category filter
+                    if (categoryValue !== 'all' && product.category !== categoryValue) {
+                        return false;
+                    }
+                    
+                    // Price filter
+                    if (priceValue !== 'all') {
+                        const [min, max] = priceValue.split('-').map(Number);
+                        if (product.price < min || product.price > max) {
+                            return false;
+                        }
+                    }
+                    
+                    // Search filter
+                    if (searchValue && !product.name.toLowerCase().includes(searchValue) && 
+                        !product.category.toLowerCase().includes(searchValue)) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // Sort products
+                switch(sortValue) {
+                    case 'price-asc':
+                        filteredProducts.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-desc':
+                        filteredProducts.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'name-asc':
+                        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'name-desc':
+                        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                    default:
+                        // Default sorting (by ID)
+                        filteredProducts.sort((a, b) => a.id.localeCompare(b.id));
+                }
+                
+                currentPage = 1;
+                displayProducts();
+            }
+            
+            // Show toast notification
+            function showToast(message) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Initialize page
+            updateCartCount();
+            displayProducts();
+            
+            // Event listeners for filters
+            categoryFilter.addEventListener('change', filterProducts);
+            priceFilter.addEventListener('change', filterProducts);
+            sortFilter.addEventListener('change', filterProducts);
+            searchFilter.addEventListener('input', filterProducts);
+            searchButton.addEventListener('click', filterProducts);
+            
+            // Close menu when clicking on links
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === productModal) {
+                    productModal.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>
