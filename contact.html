@@ -1,204 +1,1031 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - MamyShop</title>
-    <link rel="stylesheet" href="CSS/index.css" />
-    <link rel="stylesheet" href="CSS/contact.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #2c3e50;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #777;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button, .button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-color);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 150px;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            width: 200px;
+        }
+
+        .search-box button {
+            background: transparent;
+            color: var(--dark-color);
+        }
+
+        .nav-icons a {
+            font-size: 1.2rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: #f5f5f5;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-content a {
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .breadcrumb-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-content span {
+            color: var(--text-light);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+        }
+
+        .info-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .info-details p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Map */
+        .contact-map {
+            margin-top: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 300px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .success-message {
+            background-color: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: var(--error-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .form-group input.error + .error-message,
+        .form-group textarea.error + .error-message {
+            display: block;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .submit-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Social Contact */
+        .social-contact {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .social-contact h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--light-color);
+            border-radius: 50%;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .faq-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-question {
+            padding: 1rem 0;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 0 1rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            z-index: 1002;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background-color: white;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .nav-links li {
+                padding: 0.8rem 2rem;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .info-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .social-icons {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-header p {
+                font-size: 1rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
     <!-- Header -->
     <header>
-      <nav class="navbar">
-        <div class="logo">
-          <h1>MamyShop</h1>
-        </div>
-        <button
-          class="menu-button"
-          id="menu-button"
-          aria-label="Ouvrir le menu"
-          aria-expanded="false"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links" id="nav-links">
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="about.html">A propos</a></li>
-          <li><a href="chaussures.html">Chaussures</a></li>
-          <li><a href="sacs.html">Sacs</a></li>
-          <li><a href="vetements.html">Vêtements</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="nav-icons">
-          <div class="search-box">
-            <input
-              type="text"
-              placeholder="Rechercher..."
-              aria-label="Rechercher"
-            />
-            <button title="Rechercher"><i class="fas fa-search"></i></button>
-          </div>
-          <a href="account.html" title="Mon compte"
-            ><i class="fas fa-user"></i
-          ></a>
-          <a href="cart.html" class="cart-icon" title="Panier">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
-          </a>
-        </div>
-      </nav>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>MamyShop</h1>
+            </div>
+            <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="chaussures.html">Chaussures</a></li>
+                <li><a href="sacs.html">Sacs</a></li>
+                <li><a href="vetements.html">Vêtements</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <div class="search-box">
+                    <input type="text" placeholder="Rechercher..." aria-label="Rechercher">
+                    <button title="Rechercher"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="account.html" title="Mon compte"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon" title="Panier">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
     </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <a href="index.html">Accueil</a>
+                <span>/</span>
+                <span>Contact</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section class="contact-container">
-      <div class="contact-header">
-        <h1>Contactez-nous</h1>
-        <p>
-          Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour
-          toute question ou suggestion.
-        </p>
-      </div>
-
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="info-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div class="info-details">
-              <h3>Notre adresse</h3>
-              <p>123 Rue de la Mode<br />75001 Paris, France</p>
+        <div class="container">
+            <div class="contact-header">
+                <h1>Contactez-nous</h1>
+                <p>Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question ou suggestion.</p>
             </div>
-          </div>
 
-          <div class="info-item">
-            <i class="fas fa-phone-alt"></i>
-            <div class="info-details">
-              <h3>Téléphone</h3>
-              <p>+33 1 23 45 67 89<br />+33 1 98 76 54 32</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-details">
+                            <h3>Notre adresse</h3>
+                            <p>123 Rue de la Mode<br>75001 Paris, France</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="info-details">
+                            <h3>Téléphone</h3>
+                            <p>+33 1 23 45 67 89<br>+33 1 98 76 54 32</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info-details">
+                            <h3>Email</h3>
+                            <p>contact@mamyshop.com<br>support@mamyshop.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="info-details">
+                            <h3>Horaires d'ouverture</h3>
+                            <p>Lundi - Vendredi: 9h00 - 20h00<br>Samedi: 10h00 - 18h00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-map">
+                        <div id="map"></div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <div class="success-message" id="success-message">
+                        Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+                    </div>
+
+                    <form id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" required>
+                            <div class="error-message">Le nom est requis</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                            <div class="error-message">Veuillez entrer une adresse email valide</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" required>
+                            <div class="error-message">Le sujet est requis</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                            <div class="error-message">Le message est requis</div>
+                        </div>
+
+                        <button type="submit" class="submit-button">Envoyer le message</button>
+                    </form>
+
+                    <div class="social-contact">
+                        <h3>Suivez-nous sur les réseaux sociaux</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="info-item">
-            <i class="fas fa-envelope"></i>
-            <div class="info-details">
-              <h3>Email</h3>
-              <p>contact@fashionstore.com<br />support@fashionstore.com</p>
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 class="faq-title">Questions Fréquentes</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment puis-je suivre ma commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Une fois votre commande expédiée, vous recevrez un email de confirmation avec un numéro de suivi. Vous pouvez utiliser ce numéro sur notre site ou directement sur le site du transporteur pour suivre votre colis.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quelle est votre politique de retour?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les retours sous 30 jours après réception de votre commande. Les articles doivent être dans leur état d'origine, non portés et avec leurs étiquettes. Les frais de retour sont à la charge du client, sauf en cas d'erreur de notre part.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels sont les modes de paiement acceptés?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les cartes de crédit (Visa, MasterCard, American Express), PayPal, et les virements bancaires. Tous les paiements sont sécurisés et cryptés.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Proposez-vous la livraison internationale?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous livrons dans le monde entier. Les frais et délais de livraison varient selon la destination. Vous pouvez calculer les frais de livraison lors du processus de commande.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="info-item">
-            <i class="fas fa-clock"></i>
-            <div class="info-details">
-              <h3>Horaires d'ouverture</h3>
-              <p>Lundi - Vendredi: 9h00 - 20h00<br />Samedi: 10h00 - 18h00</p>
-            </div>
-          </div>
-
-          <div class="contact-map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615509614!3d48.85837007928757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1647874587123!5m2!1sfr!2sfr"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
         </div>
-
-        <div class="contact-form">
-          <div class="success-message" id="success-message">
-            Votre message a été envoyé avec succès ! Nous vous répondrons dans
-            les plus brefs délais.
-          </div>
-
-          <form id="contact-form" novalidate>
-            <div class="form-group">
-              <label for="name">Nom complet</label>
-              <input type="text" id="name" required />
-              <div class="error-message">Le nom est requis</div>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" required />
-              <div class="error-message">
-                Veuillez entrer une adresse email valide
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="subject">Sujet</label>
-              <input type="text" id="subject" required />
-              <div class="error-message">Le sujet est requis</div>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" required></textarea>
-              <div class="error-message">Le message est requis</div>
-            </div>
-
-            <button type="submit" class="submit-button">
-              Envoyer le message
-            </button>
-          </form>
-
-          <div class="social-contact">
-            <h3>Suivez-nous sur les réseaux sociaux</h3>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-pinterest"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <!-- Footer -->
     <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>À propos</h3>
-          <ul>
-            <li><a href="#">Notre histoire</a></li>
-            <li><a href="#">Nos valeurs</a></li>
-            <li><a href="#">Carrières</a></li>
-          </ul>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos</h3>
+                    <ul>
+                        <li><a href="#">Notre histoire</a></li>
+                        <li><a href="#">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Service client</h3>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Informations légales</h3>
+                    <ul>
+                        <li><a href="#">Conditions générales</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MamyShop. Tous droits réservés.</p>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Service client</h3>
-          <ul>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Livraison</a></li>
-            <li><a href="#">Retours</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Informations légales</h3>
-          <ul>
-            <li><a href="#">Conditions générales</a></li>
-            <li><a href="#">Politique de confidentialité</a></li>
-            <li><a href="#">Mentions légales</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Suivez-nous</h3>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 MamyShop. Tous droits réservés.</p>
-      </div>
     </footer>
-    <script src="JS/main.js"></script>
-  </body>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuButton = document.getElementById('menu-button');
+            const navLinks = document.getElementById('nav-links');
+            const contactForm = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+            const toast = document.getElementById('toast');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            // Menu mobile
+            menuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                menuButton.setAttribute('aria-expanded', 
+                    navLinks.classList.contains('active') ? 'true' : 'false');
+            });
+            
+            // Initialize map
+            function initMap() {
+                // Coordinates for Paris, France
+                const paris = [48.8566, 2.3522];
+                
+                // Create map
+                const map = L.map('map').setView(paris, 15);
+                
+                // Add tile layer (OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                // Add custom marker
+                const customIcon = L.icon({
+                    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34]
+                });
+                
+                // Add marker with popup
+                const marker = L.marker(paris, {icon: customIcon}).addTo(map);
+                marker.bindPopup('<b>MamyShop</b><br>123 Rue de la Mode<br>75001 Paris, France').openPopup();
+            }
+            
+            // Form validation
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // Contact form submission
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Validate name
+                const nameInput = document.getElementById('name');
+                if (!nameInput.value.trim()) {
+                    nameInput.classList.add('error');
+                    isValid = false;
+                } else {
+                    nameInput.classList.remove('error');
+                }
+                
+                // Validate email
+                const emailInput = document.getElementById('email');
+                if (!validateEmail(emailInput.value)) {
+                    emailInput.classList.add('error');
+                    isValid = false;
+                } else {
+                    emailInput.classList.remove('error');
+                }
+                
+                // Validate subject
+                const subjectInput = document.getElementById('subject');
+                if (!subjectInput.value.trim()) {
+                    subjectInput.classList.add('error');
+                    isValid = false;
+                } else {
+                    subjectInput.classList.remove('error');
+                }
+                
+                // Validate message
+                const messageInput = document.getElementById('message');
+                if (!messageInput.value.trim()) {
+                    messageInput.classList.add('error');
+                    isValid = false;
+                } else {
+                    messageInput.classList.remove('error');
+                }
+                
+                if (isValid) {
+                    // Simulate form submission
+                    showToast('Votre message a été envoyé avec succès!');
+                    successMessage.style.display = 'block';
+                    contactForm.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }
+            });
+            
+            // FAQ functionality
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Input validation on blur
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.type === 'email' && this.value && !validateEmail(this.value)) {
+                        this.classList.add('error');
+                    } else if (this.required && !this.value.trim()) {
+                        this.classList.add('error');
+                    } else {
+                        this.classList.remove('error');
+                    }
+                });
+            });
+            
+            // Show toast notification
+            function showToast(message) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Initialize map
+            initMap();
+            
+            // Close menu when clicking on links
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+        });
+    </script>
+</body>
 </html>
